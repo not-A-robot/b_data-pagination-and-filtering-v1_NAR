@@ -4,23 +4,27 @@
 const itemsPerPage = 9;
 const linkList  = document.querySelector('.link-list');
 
-
-//searchBar
+//Insert Searchbar
 document.querySelector('header').insertAdjacentHTML('beforeend', '<label for="search" class="student-search"><span>Search by name</span><input id="search" placeholder="Search by name..."><button type="button"><img src="img/icn-search.svg" alt="Search icon"></button></label>');
 
 
-document.querySelector('input').addEventListener('keyup', (e) => {
+document.querySelector('input').addEventListener('keyup', () => {
    const search = document.querySelector('input').value.toLowerCase();
    let newStudentList = [];
    for(let i = 0; i < data.length; i++){
       const student = data[i];
-      const fullName = student.name.first.toLowerCase()+' '+ student.name.last.toLowerCase();
+      const fullName = student.name.first.toLowerCase() + " " + student.name.last.toLowerCase();
       if (fullName.includes(search)){
          newStudentList.push(student)
-      }
+      } 
    }
-   showPage(newStudentList, 1);
-   addPagination(newStudentList);
+   if (newStudentList.length === 0) {
+      document.querySelector('.student-list').innerHTML = '<center>No results found</center>';
+      addPagination(newStudentList);
+   } else {
+      showPage(newStudentList, 1);
+      addPagination(newStudentList);
+   }
 });
 /* showPage: This function will create and insert/append the elements needed to display a "page" of nine students */
 
@@ -52,8 +56,9 @@ function showPage(list, page) {
 /* addPagination: This function will create and insert/append the elements needed for the pagination buttons */
 function addPagination(list) {
    const numOfPages = Math.ceil(list.length / itemsPerPage)
+   console.log(numOfPages)
    linkList.innerHTML = '';
-   for(let i = 1; i < numOfPages; i++){
+   for(let i = 1; i <= numOfPages; i++){
       li = document.createElement('li');
       button = document.createElement('button')
       button.type = 'button';
@@ -77,5 +82,8 @@ linkList.addEventListener('click', (e) => {
 });
 
 // Initial Call functions
+
 showPage(data, 1);
+
 addPagination(data)
+
