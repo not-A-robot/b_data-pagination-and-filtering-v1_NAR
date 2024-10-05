@@ -28,7 +28,7 @@ document.querySelector('input').addEventListener('keyup', () => {
    for(let i = 0; i < data.length; i++){
       const student = data[i];
       const fullName = student.name.first.toLowerCase() + " " + student.name.last.toLowerCase();
-      if (fullName.includes(search)){
+      if (fullName.includes(search)){  
          newStudentList.push(student)
       } 
    }
@@ -58,7 +58,7 @@ function showPage(list, page) {
    for(i = 0; i < list.length; i++){
       if(i >= startIndex && i <= endIndex){
          const student = list[i];
-         let currentStudent = 
+         let currentStudent =   //this was the easy way and it didn't specify if i had to use create element?
             `<li class="student-item cf">
                <div class="student-details">
                <img class="avatar" src="${student.picture.large}" alt="Profile Picture">
