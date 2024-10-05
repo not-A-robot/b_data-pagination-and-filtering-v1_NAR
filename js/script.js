@@ -11,7 +11,6 @@ const linkList  = document.querySelector('.link-list');
  * Insert Searchbar 
  * @description Inserts the html for the searchbar
  */
-//To Reviewer Note:  I've been struggling with the question of why declare a variable like Searchbar, then immediately call it to add the searhbar, then never call it again.  It seems like it would be better to just put it all in one, like i did below.  Let me know your thoughts.
 document.querySelector('header').insertAdjacentHTML('beforeend', '<label for="search" class="student-search"><span>Search by name</span><input id="search" placeholder="Search by name..."><button type="button"><img src="img/icn-search.svg" alt="Search icon"></button></label>');
 
 /**
@@ -55,7 +54,7 @@ function showPage(list, page) {
    let studentList = document.querySelector('.student-list');
    studentList.innerHTML = '';
 
-   for(i = 0; i < list.length; i++){
+   for(let i = 0; i < list.length; i++){
       if(i >= startIndex && i <= endIndex){
          const student = list[i];
          let currentStudent =   //this was the easy way and it didn't specify if i had to use create element?
@@ -84,8 +83,8 @@ function addPagination(list) {
    const numOfPages = Math.ceil(list.length / itemsPerPage)
    linkList.innerHTML = '';
    for(let i = 1; i <= numOfPages; i++){
-      li = document.createElement('li');
-      button = document.createElement('button')
+      let li = document.createElement('li');
+      let button = document.createElement('button')
       button.type = 'button';
       button.textContent = i;
       if(i === 1){
@@ -117,7 +116,6 @@ linkList.addEventListener('click', (e) => {
  * Initial Call functions 
  * @description showPage renders the first page of all students in the full database as a starting point paginated into groups of 9
  * @description addPagination renders the pagination buttons and sets the intial value to page 1
- * @event click - Listens for keyup events in the input field.
  * @requires showPage - Renders the list of students on the current page.
  * @requires addPagination - Renders the list of students on the current page.
  * @param {array} data  - the full list of students in data.js
